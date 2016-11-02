@@ -97,15 +97,9 @@ int countRuns(const string a[], int n)
 	string current = "";
 	int consecutiveStringCount = 0;
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n - 1; i++)
 	{
-		current = a[i];
-		while (a[i + 1] == current)
-		{
-			i++;
-		}
-		consecutiveStringCount++;
+		
 	}
 	return consecutiveStringCount;
-
 }
