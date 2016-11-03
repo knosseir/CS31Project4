@@ -9,6 +9,7 @@ int lookup(const string a[], int n, string target);
 int positionOfMax(const string a[], int n);
 int rotateLeft(string a[], int n, int pos);
 int countRuns(const string a[], int n);
+int flip(string a[], int n);
 
 int main()
 {
@@ -35,8 +36,12 @@ int main()
 	string d[9] = {
 		"tim", "ajamu", "mike", "mike", "donald", "donald", "donald", "mike", "mike"
 	};
-	int p = countRuns(d, 9);  //  returns 5
+	int p = countRuns(arr, 5);  //  returns 5
 	cout << p << endl;
+
+	//string folks[6] = { "ajamu", "mike", "", "tim", "mindy", "bill" };
+	//int q = flip(folks, 4);  // returns 4
+							 // folks now contains:  "tim"  ""  "mike"  "ajamu"  "mindy"  "bill"
 }
 
 int appendToAll(string a[], int n, string value)
@@ -94,12 +99,17 @@ int rotateLeft(string a[], int n, int pos)
 
 int countRuns(const string a[], int n)
 {
-	string current = "";
-	int consecutiveStringCount = 0;
+	int count = 0;
 
-	for (int i = 0; i < n - 1; i++)
+	for (int i = 0; i < n; i++)
 	{
 		
 	}
-	return consecutiveStringCount;
+
+	return count;
+}
+
+int flip(string a[], int n)
+{
+	return 0;
 }
