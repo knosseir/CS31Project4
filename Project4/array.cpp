@@ -10,10 +10,12 @@ int positionOfMax(const string a[], int n);
 int rotateLeft(string a[], int n, int pos);
 int countRuns(const string a[], int n);
 int flip(string a[], int n);
+int differ(const string a1[], int n1, const string a2[], int n2);
+int lookupAny(const string a1[], int n1, const string a2[], int n2);
 
 int main()
 {
-	string arr[] = { "one", "two", "three", "four", "five" };
+	string arr[5] = { "one", "two", "three", "four", "five" };
 	//int y = appendToAll(arr, -2, "mississippi");
 	//cout << y << endl;
 
@@ -36,12 +38,19 @@ int main()
 	string d[9] = {
 		"tim", "ajamu", "mike", "mike", "donald", "donald", "donald", "mike", "mike"
 	};
-	int p = countRuns(arr, 5);  //  returns 5
-	cout << p << endl;
+	//int p = countRuns(arr, 5);  //  returns 5
+	//cout << p << endl;
 
 	//string folks[6] = { "ajamu", "mike", "", "tim", "mindy", "bill" };
 	//int q = flip(folks, 4);  // returns 4
 							 // folks now contains:  "tim"  ""  "mike"  "ajamu"  "mindy"  "bill"
+	string folks[6] = { "ajamu", "mike", "", "tim", "mindy", "bill" };
+	string group[5] = { "ajamu", "mike", "bill", "", "tim" };
+	string test[5] = { "one", "two", "three", "four", "five" };
+	int r = differ(folks, 6, group, 5);  //  returns 2
+	int s = differ(folks, 2, group, 1);  //  returns 1
+	int t = differ(arr, 5, test, 5);
+	cout << r << endl << s << endl << t << endl;
 }
 
 int appendToAll(string a[], int n, string value)
@@ -103,7 +112,7 @@ int countRuns(const string a[], int n)
 
 	for (int i = 0; i < n; i++)
 	{
-		
+
 	}
 
 	return count;
@@ -112,4 +121,35 @@ int countRuns(const string a[], int n)
 int flip(string a[], int n)
 {
 	return 0;
+}
+
+int differ(const string a1[], int n1, const string a2[], int n2)
+{
+	int index;
+
+	if (n1 < n2) index = n1;
+	if (n2 < n1) index = n2;
+	else index = n1;
+
+	for (int i = 0; i < index; i++)
+	{
+		if (a1[i] != a2[i])
+		{
+			return i;
+		}
+		if (i == index - 1) return index;
+	}
+}
+
+int lookupAny(const string a1[], int n1, const string a2[], int n2)
+{
+
+	for (int i = 0; i < n1; i++)
+	{
+		for (int j = 0; j < n2; j++)
+		{
+			if (a1[i] == a2[j]) return i;
+		}
+	}
+	return -1;
 }
