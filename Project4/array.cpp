@@ -11,46 +11,13 @@ int rotateLeft(string a[], int n, int pos);
 int countRuns(const string a[], int n);
 int flip(string a[], int n);
 int differ(const string a1[], int n1, const string a2[], int n2);
+int subsequence(const string a1[], int n1, const string a2[], int n2);
 int lookupAny(const string a1[], int n1, const string a2[], int n2);
+int separate(string a[], int n, string separator);
 
 int main()
 {
-	string arr[5] = { "one", "two", "three", "four", "five" };
-	//int y = appendToAll(arr, -2, "mississippi");
-	//cout << y << endl;
-
-	//int r = lookup(arr, -2, "two");
-	//cout << r << endl;
-
-	//string cand[6] = { "jill", "hillary", "donald", "tim", "evan", "mike" };
-	//int k = positionOfMax(cand, 6);   // returns 3, since  tim  is latest
-									  // in alphabetic order
-	//cout << k << endl;
-
-	//string running[5] = { "evan", "donald", "gary", "jill", "hillary" };
-	//int m = rotateLeft(running, 5, 1);  // returns 1
-										// running now contains:  "evan", "gary", "jill", "hillary", "donald"
-	//cout << m << endl;
-
-	//int f = rotateLeft(arr, 5, 2);
-	//cout << f << endl;
-
-	string d[9] = {
-		"tim", "ajamu", "mike", "mike", "donald", "donald", "donald", "mike", "mike"
-	};
-	//int p = countRuns(arr, 5);  //  returns 5
-	//cout << p << endl;
-
-	//string folks[6] = { "ajamu", "mike", "", "tim", "mindy", "bill" };
-	//int q = flip(folks, 4);  // returns 4
-							 // folks now contains:  "tim"  ""  "mike"  "ajamu"  "mindy"  "bill"
-	string folks[6] = { "ajamu", "mike", "", "tim", "mindy", "bill" };
-	string group[5] = { "ajamu", "mike", "bill", "", "tim" };
-	string test[5] = { "one", "two", "three", "four", "five" };
-	int r = differ(folks, 6, group, 5);  //  returns 2
-	int s = differ(folks, 2, group, 1);  //  returns 1
-	int t = differ(arr, 5, test, 5);
-	cout << r << endl << s << endl << t << endl;
+	
 }
 
 int appendToAll(string a[], int n, string value)
@@ -108,19 +75,46 @@ int rotateLeft(string a[], int n, int pos)
 
 int countRuns(const string a[], int n)
 {
-	int count = 0;
+	int count = 0, sameStringCount = 1;
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i += sameStringCount)
 	{
-
+		sameStringCount = 1;
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[i] == a[j])
+			{
+				sameStringCount++;
+			}
+			else
+			{
+				count++;
+				break;
+			}
+		}
+		if (i >= n - sameStringCount) count++;
 	}
-
 	return count;
 }
 
 int flip(string a[], int n)
 {
-	return 0;
+	int j = n - 1;
+	string temp;
+
+	for (int i = 0; i < n / 2; i++)
+	{
+		temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+		j--;
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		cout << a[i] << " ";
+	}
+	return n;
 }
 
 int differ(const string a1[], int n1, const string a2[], int n2)
@@ -139,11 +133,29 @@ int differ(const string a1[], int n1, const string a2[], int n2)
 		}
 		if (i == index - 1) return index;
 	}
+	return -1;
+}
+
+int subsequence(const string a1[], int n1, const string a2[], int n2)
+{
+	for (int i = 0; i < n1; i++)
+	{
+		if (a2[0] == a1[i])
+		{
+			for (int j = 0; j < n2; j++)
+			{
+				if (a2[j] == a1[i + 1])
+				{
+					return i;
+				}
+			}
+		}
+	}
+	return -1;
 }
 
 int lookupAny(const string a1[], int n1, const string a2[], int n2)
 {
-
 	for (int i = 0; i < n1; i++)
 	{
 		for (int j = 0; j < n2; j++)
@@ -152,4 +164,29 @@ int lookupAny(const string a1[], int n1, const string a2[], int n2)
 		}
 	}
 	return -1;
+}
+
+int separate(string a[], int n, string separator)
+{
+	int pos = 0;
+	string temp;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (a[i] < a[j])
+			{
+				temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+
+	while ((a[pos] < separator) && pos < n) pos++;
+
+	for (int i = 0; i < n; i++) cout << a[i] << " ";
+
+	return pos;
 }
