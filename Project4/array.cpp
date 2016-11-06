@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <cassert>
 
 using namespace std;
 
@@ -18,6 +19,30 @@ int separate(string a[], int n, string separator);
 int main()
 {
 	
+	string h[7] = { "jill", "hillary", "donald", "tim", "", "evan", "gary" };
+	assert(lookup(h, 7, "evan") == 5);
+	assert(lookup(h, 7, "donald") == 2);
+	assert(lookup(h, 2, "donald") == -1);
+	assert(positionOfMax(h, 7) == 3);
+
+	string g[4] = { "jill", "hillary", "gary", "mindy" };
+	//assert(differ(h, 4, g, 4) == 2);
+	assert(appendToAll(g, 4, "?") == 4 && g[0] == "jill?" && g[3] == "mindy?");
+	assert(rotateLeft(g, 4, 1) == 1 && g[1] == "gary?" && g[3] == "hillary?");
+
+	string e[4] = { "donald", "tim", "", "evan" };
+	assert(subsequence(h, 7, e, 4) == 2);
+
+	string d[5] = { "hillary", "hillary", "hillary", "tim", "tim" };
+	assert(countRuns(d, 5) == 2);
+
+	string f[3] = { "gary", "donald", "mike" };
+	assert(lookupAny(h, 7, f, 3) == 2);
+	assert(flip(f, 3) == 3 && f[0] == "mike" && f[2] == "gary");
+
+	assert(separate(h, 7, "gary") == 3);
+
+	cout << "All tests succeeded" << endl;
 }
 
 int appendToAll(string a[], int n, string value)
@@ -100,7 +125,7 @@ int countRuns(const string a[], int n)
 int flip(string a[], int n)
 {
 	int j = n - 1;
-	string temp;
+	string temp = "";
 
 	for (int i = 0; i < n / 2; i++)
 	{
@@ -110,11 +135,12 @@ int flip(string a[], int n)
 		j--;
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < n; i++)
 	{
 		cout << a[i] << " ";
 	}
 	return n;
+
 }
 
 int differ(const string a1[], int n1, const string a2[], int n2)
